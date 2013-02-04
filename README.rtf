@@ -1,0 +1,94 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red127\green0\blue85;\red0\green0\blue192;\red42\green0\blue255;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13700\viewh15700\viewkind0\viewscale121
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 README\
+\
+Dependencies for running Python scripts, \
+nltk library\
+Download corpus : Stopwords, wordnet\
+\
+Dependencies for running Java, \
+Apache commons-logging\
+GSon\
+Jaws\
+Jsoup\
+Jwnl\
+Lucene\
+Stanford - corenlp\
+\
+1) Unzip DocFileHelper.zip\
+2) Go inside the DocFileHelper folder.\
+3) Download the train and test files inside DocFileHelper folder.\
+4) Make a new folder test_lucenedocs in test folder\
+5) Make a new folder train_lucenedocs in test folder\
+\
+6) python TrainDocFileHelper.py\
+7) python TestDocFileHelper.py\
+\
+8) Unzip QASystem.zip\
+9) Create a new Java project in Eclipse and configure buildpath with required dependencies.\
+10) Link the src folder inside the QASystem to the Java project using Properties -> Build Path-> Link Source\
+11) Move test_lucenedocs and train_lucenedocs to the Java project workspace\
+\
+Running for training data\
+12) Change LuceneConstants.java
+\f1\fs22 \
+\pard\pardeftab720
+\cf0 	\cf2 public\cf0  \cf2 static\cf0  String \cf3 docRoot\cf0  = \cf4 "train_lucenedocs/top_docs."\cf0 ;\
+	\cf2 public\cf0  \cf2 static\cf0  String \cf3 indexRoot\cf0  = \cf4 "index_train/"\cf0 ;\
+	\cf2 public\cf0  \cf2 static\cf0  \cf2 int\cf0  \cf3 startDoc\cf0  = 201;\
+	\cf2 public\cf0  \cf2 static\cf0  String \cf3 indexWikiRoot\cf0  = \cf4 "index_train/wiki/"\cf0 ;\
+	\cf2 public\cf0  \cf2 static\cf0  \cf2 final\cf0  \cf2 int\cf0  \cf3 totalDocs\cf0  = 199;
+\f0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 13) Run Indexer.java - This step creates index for training data at folder index_train\
+14) Change Parser.java : line 34 to \
+	
+\f1\fs22 \cf2 public\cf0  \cf2 static\cf0  \cf2 final\cf0  String \cf3 QUESTIONS_FILE\cf0  = \cf4 "./data/train/questions.txt"\cf0 ;\
+15) 
+\f0\fs24 Change Parser.java : line 43 to 
+\f1\fs22 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf3 subFile\cf0  = \cf2 new\cf0  BufferedWriter(\cf2 new\cf0  FileWriter(\cf4 "submission_train"\cf0  +\
+\pard\pardeftab720
+\cf0 					\cf4 ".txt"\cf0 ));\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 16) Run Parser.java\
+17) Submit submission_train.txt to web-scoring system\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 Running for test data\
+12) Change LuceneConstants.java
+\f1\fs22 \
+\pard\pardeftab720
+\cf0 	\cf2 public\cf0  \cf2 static\cf0  String \cf3 docRoot\cf0  = \cf4 "test_lucenedocs/top_docs."\cf0 ;\
+	\cf2 public\cf0  \cf2 static\cf0  String \cf3 indexRoot\cf0  = \cf4 "index_test/"\cf0 ;\
+	\cf2 public\cf0  \cf2 static\cf0  \cf2 int\cf0  \cf3 startDoc\cf0  = 400;\
+	\cf2 public\cf0  \cf2 static\cf0  String \cf3 indexWikiRoot\cf0  = \cf4 "index_test/wiki/"\cf0 ;\
+	\cf2 public\cf0  \cf2 static\cf0  \cf2 final\cf0  \cf2 int\cf0  \cf3 totalDocs\cf0  = 200;
+\f0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 13) Run Indexer.java - This step creates index for training data at folder index_train\
+14) Change Parser.java : line 34 to \
+	
+\f1\fs22 \cf2 public\cf0  \cf2 static\cf0  \cf2 final\cf0  String \cf3 QUESTIONS_FILE\cf0  = \cf4 "./data/test/questions.txt"\cf0 ;\
+15) 
+\f0\fs24 Change Parser.java : line 43 to 
+\f1\fs22 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf3 subFile\cf0  = \cf2 new\cf0  BufferedWriter(\cf2 new\cf0  FileWriter(\cf4 "submission_test"\cf0  +\
+\pard\pardeftab720
+\cf0 					\cf4 ".txt"\cf0 ));\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 16) Run Parser.java\
+17) Submit submission_test.txt to web-scoring system\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \
+
+{\*\beandata789c9d935d6f82301486aff157748db752d876b12d8851c1c4cc2099b86497153a65e32ba5cef1ef57444aeb66b68c1bda73fabe4f7b4e6b8d3ed3047c105ac6793684a66e4040b2308fe26c3b84eb6036b88323bb675d39cb69f0e2bba048e292017f3d59cca7000e101a17454210720207f88bf92a00dc0321d78300ee182b1e103a1c0e3aae57e9619ed60b4be4d3bc2094550b6e36e0023d6211e498c65dd90e8f4671c8ec9e66bd93caee631aee62bec242f594474b46f9666d6ff5482a128d45fa146f75f9e68d84ac14324c29ae07c2a09fed934492692d573b3984092e855e4e37f9e9acbf9e3b5d5eb3e28c912da1f6ad85dae1518854636fa5f39fec2cf6a6502e603aceb5ca5140a8f36ca16715f93ff7e64fdc2eda567ce28ebd27f6ead6f78d778ef1e866cf48f9dcf4dfdba71ba591d2490dd334ee0df5c03ff68b5c3a9fb8360e57711aa6958c92572c8f8552b2dfead9d0329c1289f70b4354a4736bbc585e887b2a8a56cf2704670e665830cece7cde24513053ad540756ded6e9e109b6501bf52759b43a0b1d5facddfb02aa1d4161}}
